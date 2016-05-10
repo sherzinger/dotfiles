@@ -7,7 +7,7 @@ Host etriks1
     User root
 
 Host etriks7
-    HostName 10.79.2.49
+    HostName 10.79.2.45
     Port 8022
     LocalForward 3080 127.0.0.1:5432
     User root
