@@ -1,0 +1,14 @@
+[user]
+    name = Sascha Herzinger
+    email = sascha.herzinger@uni.lu
+[core]
+    editor = /opt/local/bin/mvim
+[mergetool "mvimdiff"]
+    cmd = /opt/local/bin/mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+[merge]
+    tool = mvimdiff
+    conflictstyle = diff3
+[difftool "mvimdiff"]
+    cmd = /opt/local/bin/mvimdiff
+[diff]
+    tool = mvimdiff
