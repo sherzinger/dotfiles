@@ -4,19 +4,23 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+"Awesome colorschemes
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'endel/vim-github-colorscheme'
 call vundle#end()
 
 filetype indent plugin on
 syntax on
+
 colorscheme solarized
 set background=dark
+
 set encoding=utf-8
 set ruler
 set colorcolumn=140
@@ -46,6 +50,8 @@ nnoremap <silent> <CR> :noh<CR><CR>
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
+
+vnoremap <C-o> :normal<Space>
 
 augroup misc
     autocmd!
@@ -79,6 +85,7 @@ set shortmess+=c
 
 "Setup for CtrlP
 let g:ctrlp_by_filename=1
+nnoremap <leader>cc :CtrlPClearAllCaches<CR>
 
 "Keybindings for tern_for_vim
 nnoremap <Leader>tt :TernType<CR>
