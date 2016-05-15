@@ -6,19 +6,19 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
-Plugin 'ternjs/tern_for_vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 "Awesome colorschemes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'endel/vim-github-colorscheme'
+Plugin 'whatyouhide/vim-gotham'
 call vundle#end()
 
 filetype indent plugin on
 syntax on
 
-colorscheme solarized
+colorscheme gotham
 set background=dark
 
 set encoding=utf-8
@@ -41,11 +41,14 @@ set guifont=Fira\ Mono
 set noswapfile
 set nobackup
 
-let mapleader=","
+let mapleader=" "
+set notimeout
+set nottimeout
 
 nnoremap Y y$
 nnoremap <Leader>b :buffers<CR>:buffer<Space>
-nnoremap <silent> <CR> :noh<CR><CR>
+nnoremap <silent> <c-l> :nohlsearch<cr><c-l>
+nnoremap <CR> :
 
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
@@ -80,17 +83,19 @@ let g:syntastic_mode_map={ 'mode': 'active',
                      \ 'active_filetypes': [],
                      \ 'passive_filetypes': ['html', 'css'] }
 
-"Disable status message of YCM
-set shortmess+=c
-
 "Setup for CtrlP
 let g:ctrlp_by_filename=1
 nnoremap <leader>cc :CtrlPClearAllCaches<CR>
 
-"Keybindings for tern_for_vim
-nnoremap <Leader>tt :TernType<CR>
-nnoremap <Leader>tr :TernRename<CR>
-nnoremap <Leader>td :TernDef<CR>
-nnoremap <Leader>tm :TernDoc<CR>
-nnoremap <Leader>tf :TernRefs<CR>
+"Keybindings for YCM/Tern
+nnoremap <Leader>yr :YcmCompleter RefactorRename<Space>
+nnoremap <Leader>yd :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>yf :YcmCompleter GoToReferences<CR>
+nnoremap <Leader>yt :YcmCompleter GetType<CR>
+nnoremap <Leader>ym :YcmCompleter GetDoc<CR>
+
+"Disable status message of YCM
+set shortmess+=c
+"Disable Documentation popup of YCM
+set completeopt-=preview
 
