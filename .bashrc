@@ -19,5 +19,3 @@ export CLICOLOR=1
 export LSCOLORS=Axgxxxxxagxxxxxxxx
 export PS1="\[\033[38;5;9m\]\u\[$(tput sgr0)\]\[\033[38;5;7m\]@\h:\[$(tput sgr0)\]\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[\033[38;5;7m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 
-export EDITOR=/opt/local/bin/mvim
-
