@@ -1,0 +1,18 @@
+source "gpg2 -dq ~/.mutt/.mailbox_pw.gpg |"
+
+set editor=`echo \$EDITOR`
+set my_name="Sascha Herzinger"
+set folder=imaps://imap.mailbox.org:993
+set spoolfile=+INBOX
+set postponed=+Drafts
+set message_cachedir=~/.cache/mutt
+set mail_check=120
+set ssl_force_tls=yes
+# IMAP
+set imap_user=sascha.herzinger@mailbox.org
+set imap_pass=$my_pw_mailbox
+set imap_check_subscribed
+set imap_keepalive=300
+# STMP
+set smtp_url=smtps://$imap_user:$my_pw_mailbox@smtp.mailbox.org:465
+
