@@ -9,6 +9,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'rking/ag.vim'
 "Awesome colorschemes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'endel/vim-github-colorscheme'
@@ -98,4 +99,7 @@ nnoremap <Leader>ym :YcmCompleter GetDoc<CR>
 set shortmess+=c
 "Disable Documentation popup of YCM
 set completeopt-=preview
+
+"Setup for Ag.vim
+let g:ag_working_path_mode="r"
 
