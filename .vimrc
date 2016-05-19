@@ -14,17 +14,19 @@ Plugin 'rking/ag.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'endel/vim-github-colorscheme'
 Plugin 'whatyouhide/vim-gotham'
+Plugin 'morhetz/gruvbox'
 call vundle#end()
 
 filetype indent plugin on
 syntax on
 
-colorscheme gotham
 set background=dark
+colorscheme gruvbox
 
 set encoding=utf-8
 set ruler
 set colorcolumn=140
+set number
 set relativenumber
 set wildmenu
 set showcmd
@@ -38,7 +40,7 @@ set smarttab
 set laststatus=2
 set autoread
 set scrolloff=1
-set guifont=Fira\ Mono
+set guifont=Fira\ Mono:h11
 set noswapfile
 set nobackup
 
