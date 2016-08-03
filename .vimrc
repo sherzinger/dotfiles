@@ -10,6 +10,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'rking/ag.vim'
+Plugin 'jiangmiao/auto-pairs'
 "Awesome colorschemes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'endel/vim-github-colorscheme'
@@ -26,20 +27,25 @@ colorscheme gruvbox
 set encoding=utf-8
 set ruler
 set colorcolumn=140
+set synmaxcol=140
 set number
 set relativenumber
 set wildmenu
 set showcmd
 set hlsearch
+set incsearch
 set hidden
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 set smarttab
+set smartcase
 set laststatus=2
 set autoread
+set clipboard=unnamed
 set scrolloff=1
+set nowrap
 set guifont=Fira\ Mono:h11
 set noswapfile
 set nobackup
@@ -49,20 +55,17 @@ set notimeout
 set nottimeout
 
 nnoremap Y y$
+nnoremap n nzz
+nnoremap N Nzz
 nnoremap <Leader>b :buffers<CR>:buffer<Space>
 nnoremap <silent> <c-l> :nohlsearch<cr><c-l>
 nnoremap <CR> :
-
-inoremap (<CR> (<CR>)<Esc>O
-inoremap {<CR> {<CR>}<Esc>O
-inoremap [<CR> [<CR>]<Esc>O
 
 vnoremap <C-o> :normal<Space>
 
 augroup misc
     autocmd!
     autocmd BufWritePost .vimrc source %
-    autocmd BufWritePre * :%s/\s\+$//e
 augroup END
 
 "Build statusline
