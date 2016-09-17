@@ -1,9 +1,9 @@
 call plug#begin()
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-Plug 'scrooloose/syntastic'
+Plug 'carlitux/deoplete-ternjs'
 Plug 'pangloss/vim-javascript'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'jiangmiao/auto-pairs'
@@ -19,7 +19,6 @@ syntax on
 set background=dark
 colorscheme gruvbox
 
-set encoding=utf-8
 set ruler
 set colorcolumn=140
 set synmaxcol=200
@@ -83,9 +82,17 @@ let g:syntastic_mode_map={ 'mode': 'active',
                      \ 'active_filetypes': [],
                      \ 'passive_filetypes': ['html', 'css'] }
 
-"Setup for deoplete
+"Activate deoplete on startup
 let g:deoplete#enable_at_startup = 1
 
-"Setup for deoplete ternjs
-let g:tern_request_timeout = 1
+"Let <Tab> also do completion
+inoremap <silent><expr> <Tab>
+\ pumvisible() ? "\<C-n>" :
+\ deoplete#mappings#manual_complete()
 
+inoremap <silent><expr> <S-Tab>
+\ pumvisible() ? "\<C-p>" :
+\ deoplete#mappings#manual_complete()
+
+"Close the documentation window when completion is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
