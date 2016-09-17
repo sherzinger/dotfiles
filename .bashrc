@@ -19,3 +19,8 @@ export CLICOLOR=1
 export LSCOLORS=Axgxxxxxagxxxxxxxx
 export PS1="\[\033[38;5;9m\]\u\[$(tput sgr0)\]\[\033[38;5;7m\]@\h:\[$(tput sgr0)\]\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[\033[38;5;7m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 
+# add fastboot and adb to PATH
+export PATH=$PATH:~/.android-sdk-macosx/platform-tools/
+
+# make fzf work with bash
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

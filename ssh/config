@@ -4,7 +4,7 @@ Host etriks1
     HostName 10.79.2.11
     Port 8022
     LocalForward 3080 127.0.0.1:5432
-    User root
+    User sascha.herzinger
 
 Host etriks7
     HostName 10.79.2.45

@@ -1,0 +1,18 @@
+set number
+set relativenumber
+set hlsearch
+set incsearch
+set clipboard=unnamed
+set scrolloff=1
+set showmode
+
+nnoremap Y y$
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap <silent> <c-l> :nohlsearch<cr><c-l>
+nnoremap <CR> :
+vnoremap <C-o> :normal<Space>
+
+set surround
+
+

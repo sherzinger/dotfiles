@@ -1,22 +1,17 @@
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'rking/ag.vim'
-Plugin 'jiangmiao/auto-pairs'
+call plug#begin()
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'scrooloose/syntastic'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'jiangmiao/auto-pairs'
 "Awesome colorschemes
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'endel/vim-github-colorscheme'
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'morhetz/gruvbox'
-call vundle#end()
+Plug 'endel/vim-github-colorscheme'
+Plug 'whatyouhide/vim-gotham'
+Plug 'morhetz/gruvbox'
+call plug#end()
 
 filetype indent plugin on
 syntax on
@@ -57,15 +52,14 @@ set nottimeout
 nnoremap Y y$
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap <Leader>b :buffers<CR>:buffer<Space>
 nnoremap <silent> <c-l> :nohlsearch<cr><c-l>
 nnoremap <CR> :
-
+nnoremap <c-p> :FZF<cr>
 vnoremap <C-o> :normal<Space>
 
 augroup misc
     autocmd!
-    autocmd BufWritePost .vimrc source %
+    autocmd BufWritePost init.vim source %
 augroup END
 
 "Build statusline
@@ -89,22 +83,9 @@ let g:syntastic_mode_map={ 'mode': 'active',
                      \ 'active_filetypes': [],
                      \ 'passive_filetypes': ['html', 'css'] }
 
-"Setup for CtrlP
-let g:ctrlp_by_filename=1
-nnoremap <leader>cc :CtrlPClearAllCaches<CR>
+"Setup for deoplete
+let g:deoplete#enable_at_startup = 1
 
-"Keybindings for YCM/Tern
-nnoremap <Leader>yr :YcmCompleter RefactorRename<Space>
-nnoremap <Leader>yd :YcmCompleter GoToDefinition<CR>
-nnoremap <Leader>yf :YcmCompleter GoToReferences<CR>
-nnoremap <Leader>yt :YcmCompleter GetType<CR>
-nnoremap <Leader>ym :YcmCompleter GetDoc<CR>
-
-"Disable status message of YCM
-set shortmess+=c
-"Disable Documentation popup of YCM
-set completeopt-=preview
-
-"Setup for Ag.vim
-let g:ag_working_path_mode="r"
+"Setup for deoplete ternjs
+let g:tern_request_timeout = 1
 
