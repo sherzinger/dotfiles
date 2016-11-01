@@ -1,27 +1,39 @@
 call plug#begin()
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 Plug 'carlitux/deoplete-ternjs'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'pangloss/vim-javascript'
+
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'ap/vim-css-color'
+
+Plug 'zchee/deoplete-jedi'
+Plug 'hynek/vim-python-pep8-indent'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'scrooloose/syntastic'
+Plug 'mileszs/ack.vim'
+Plug 'neomake/neomake'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'jiangmiao/auto-pairs'
-"Awesome colorschemes
-Plug 'endel/vim-github-colorscheme'
+
 Plug 'whatyouhide/vim-gotham'
 Plug 'morhetz/gruvbox'
+Plug 'alessandroyorba/despacio'
+Plug 'romainl/Apprentice'
+Plug 'iCyMind/NeoSolarized'
 call plug#end()
 
 filetype indent plugin on
 syntax on
 
-set background=dark
-colorscheme gruvbox
+set background=light
+colorscheme NeoSolarized
 
 set ruler
-set colorcolumn=140
 set synmaxcol=200
+set termguicolors
 set number
 set relativenumber
 set wildmenu
@@ -40,7 +52,6 @@ set autoread
 set clipboard=unnamed
 set scrolloff=1
 set nowrap
-set guifont=Fira\ Mono:h11
 set noswapfile
 set nobackup
 
@@ -48,51 +59,71 @@ let mapleader=" "
 set notimeout
 set nottimeout
 
+"Disable preview window
+set completeopt-=preview
+
 nnoremap Y y$
-nnoremap n nzz
-nnoremap N Nzz
 nnoremap <silent> <c-l> :nohlsearch<cr><c-l>
 nnoremap <CR> :
 nnoremap <c-p> :FZF<cr>
-vnoremap <C-o> :normal<Space>
 
 augroup misc
     autocmd!
     autocmd BufWritePost init.vim source %
+    autocmd BufWritePost * Neomake
+    autocmd InsertEnter,InsertLeave * set cul! "highlight line in insert mode
+    "Close the documentation window when completion is done
+    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup END
+
+"Let <Tab> shift through omnicompletion
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+"Hardcode python path for virtualenv support
+"See https://github.com/neovim/neovim/issues/1887
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 "Build statusline
 set statusline=
 set statusline+=\ %n\       "set buffer number
-set statusline+=%t\         "set filename
+set statusline+=%f\         "set filename
 set statusline+=%y%r%m\     "set readonly and modified flag
 set statusline+=%=          "seperation between left and right aligned
 set statusline+=(%l,%c)\    "set line and column number
 set statusline+=%p%%/%L\    "set percentage of total lines in file
 
-"Setup for Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
-let g:syntastic_mode_map={ 'mode': 'active',
-                     \ 'active_filetypes': [],
-                     \ 'passive_filetypes': ['html', 'css'] }
+"##################################################
+" FILE TYPE SPECIFIC SETTING
+"##################################################
 
-"Activate deoplete on startup
+autocmd Filetype python setlocal colorcolumn=80
+
+"##################################################
+" PLUGIN SECTION
+"##################################################
+
+"Neomake
+let g:neomake_javascript_jshint_maker = {
+    \ 'args': ['--verbose'],
+    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+    \ }
+let g:neomake_javascript_enabled_makers = ['jshint']
+let g:neomake_python_enabled_markers = ['flake8']
+
+
+"Deoplete
 let g:deoplete#enable_at_startup = 1
 
-"Let <Tab> also do completion
-inoremap <silent><expr> <Tab>
-\ pumvisible() ? "\<C-n>" :
-\ deoplete#mappings#manual_complete()
+"TernJS
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
 
-inoremap <silent><expr> <S-Tab>
-\ pumvisible() ? "\<C-p>" :
-\ deoplete#mappings#manual_complete()
 
-"Close the documentation window when completion is done
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+"Ack
+let g:ackprg = 'ag --vimgrep'
+
+
+"fzf
+set rtp+=/usr/local/bin/fzf
+
